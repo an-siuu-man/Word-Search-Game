@@ -1,13 +1,12 @@
 from openai import OpenAI
 import requests
+from openai_api_key import key
 grid_size = 14
 num_of_words = 12
 def get_words_for_grid(topic):
-    # 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       <---------------- ChatGPT API key (DON'T REMOVE THIS FROM THIS LINE)
-
     topic_name = topic
-    # Replace 'YOUR_OPENAI_API_KEY' with your actual OpenAI API key
-    openai_api_key = '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'
+
+    openai_api_key = key
 
     # OpenAI API endpoint
     api_endpoint = 'https://api.openai.com/v1/chat/completions'
