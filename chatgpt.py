@@ -2,7 +2,7 @@ from openai import OpenAI
 import requests
 from openai_api_key import key
 grid_size = 14
-num_of_words = 12
+num_of_words = 10
 def get_words_for_grid(topic):
     topic_name = topic
 
