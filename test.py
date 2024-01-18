@@ -35,7 +35,8 @@ for i in range(grid_size):
 for i in range(grid_size):
     for i in range(grid_size):
 
-        # the lowercase letter 'a' is added after each randomly generated letter to differentiate it from the letters which will be inserted by the recursive function
+        # the lowercase letter 'a' is added after each randomly generated letter to differentiate it...
+        # ... from the letters which will be inserted by the recursive function
         grid[i].append( rand.choice(alphabets) + 'a')
 
 # declare a list called visited_grid which will contain elements of the form [row, col] as coordinates to tell the recursive functions the locations...
