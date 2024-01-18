@@ -26,6 +26,7 @@ grid_size = 14
 
 #the topic from which the words belong (this is intended to be provided by the user)
 topic_name = "spanish soccer teams"
+
 #run a loop to first attach empty lists to the grid in order to make it a 2-D list
 for i in range(grid_size):
     grid.append([])
@@ -787,6 +788,7 @@ def word_limits(word, grid_size, direction):
     if direction == 'rtol':
         return[rand.randint(0,grid_size-1), rand.randint(len(word)-1,grid_size-1)]        
 ####################################################################################################################
+    
 def check_and_place(word, row, col, direction = rand.choice(orientation)):
         
     if check_word_limits(word, row, col, direction):
@@ -794,9 +796,12 @@ def check_and_place(word, row, col, direction = rand.choice(orientation)):
 
 word_list = get_words_for_grid(topic_name)
 
+start_positions = []
 for word in word_list:
     direction = rand.choice(orientation)
     k = word_limits(word,grid_size,direction)
+    while k in start_positions:
+        k = word_limits(word,grid_size,direction)
     check_and_place(word, k[0], k[1], direction)
 
 print(printed_words)
