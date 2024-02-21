@@ -13,7 +13,7 @@ def recommendation_topics():
     # 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       <---------------- ChatGPT API key (DON'T REMOVE THIS FROM THIS LINE)
 
     # Replace 'YOUR_OPENAI_API_KEY' with your actual OpenAI API key
-    openai_api_key = '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'
+    openai_api_key = 'YOUR_OPENAI_API_KEY'
 
     # OpenAI API endpoint
     api_endpoint = 'https://api.openai.com/v1/chat/completions'
@@ -425,7 +425,7 @@ def list_of_words(topic, grid_size):
     # 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       <---------------- ChatGPT API key (DON'T REMOVE THIS FROM THIS LINE)
 
     # Replace 'YOUR_OPENAI_API_KEY' with your actual OpenAI API key
-    openai_api_key = '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'
+    openai_api_key = 'YOUR_OPENAI_API_KEY'
 
     # OpenAI API endpoint
     api_endpoint = 'https://api.openai.com/v1/chat/completions'
