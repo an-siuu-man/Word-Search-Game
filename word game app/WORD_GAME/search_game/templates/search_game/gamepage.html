@@ -8,15 +8,16 @@
         <title>Testing</title>
         <body>
             <h1>Word Search Game</h1>
-            <table id = 'grid'>
+            <table id='grid'>
                 {% for row in grid %}
                     <tr>
                         {% for letter in row %}
-                            <td>{{letter}}</td>
+                            <td id='{{ forloop.parentloop.counter }}_{{ forloop.counter }}'>{{ letter }}</td>
                         {% endfor %}
                     </tr>
                 {% endfor %}
-            </table>     
+            </table>
+            
             <h2>
                 Word List:
             </h2>       
@@ -25,6 +26,10 @@
             <div id = 'word'>{{i}}</div>
             {% endfor %}
         </p>
+        <script>
+            var printed_words = "{{printed_words}}";
+            var grid = "{{ grid }}";
+        </script>
         <a href="{% url 'homepage' %}">Bored or stuck? Make a new game!</a>
         <script src = "{% static 'search_game/gamepage_script.js' %}"></script>
         </body>
