@@ -6,7 +6,7 @@ from openai import OpenAI
 import requests
 class MakeAGridForm (forms.Form):
     topic_name = forms.CharField(label = "Enter the topic name ", widget=forms.TextInput(attrs={"class": 'topic_name'}) )
-    grid_size = forms.IntegerField(label = "Enter the desired grid size ", max_value= 20, min_value=5, widget= forms.NumberInput(attrs={'class': 'grid_size'}))
+    grid_size = forms.IntegerField(label = "Enter the desired grid size ", max_value= 30, min_value=5, widget= forms.NumberInput(attrs={'class': 'grid_size'}))
 
 def recommendation_topics():
 
@@ -275,63 +275,6 @@ def making_the_game(grid_size, word_list):
                 valid_pos = place_word(word, row+1, col, direction)
                 if valid_pos:
                     return True
-            orient = []
-            for i in orientation:
-                if i != direction:
-                    orient.append(i)
-            dir = rand.choice(orient)
-            if check_word_limits(word, row, col-1, dir) and [row, col-1] not in visited_grid:
-                valid_pos = place_word(word, row, col-1, dir)
-                if valid_pos:
-                    return True
-            if check_word_limits(word, row-1, col, dir) and [row-1, col] not in visited_grid:
-                valid_pos = place_word(word, row-1, col, dir)
-                if valid_pos:
-                    return True
-            if check_word_limits(word, row, col+1, dir) and [row, col+1] not in visited_grid:
-                valid_pos = place_word(word, row, col+1, dir)
-                if valid_pos:
-                    return True
-            if check_word_limits(word, row+1, col, dir) and [row+1, col] not in visited_grid:
-                valid_pos = place_word(word, row+1, col, dir)
-                if valid_pos:
-                    return True
-            orient.remove(dir)
-            dir = rand.choice(orient)
-            if check_word_limits(word, row, col-1, dir) and [row, col-1] not in visited_grid:
-                valid_pos = place_word(word, row, col-1, dir)
-                if valid_pos:
-                    return True
-            if check_word_limits(word, row-1, col, dir) and [row-1, col] not in visited_grid:
-                valid_pos = place_word(word, row-1, col, dir)
-                if valid_pos:
-                    return True
-            if check_word_limits(word, row, col+1, dir) and [row, col+1] not in visited_grid:
-                valid_pos = place_word(word, row, col+1, dir)
-                if valid_pos:
-                    return True
-            if check_word_limits(word, row+1, col, dir) and [row+1, col] not in visited_grid:
-                valid_pos = place_word(word, row+1, col, dir)
-                if valid_pos:
-                    return True
-            orient.remove(dir)
-            dir = rand.choice(orient)
-            if check_word_limits(word, row, col-1, dir) and [row, col-1] not in visited_grid:
-                valid_pos = place_word(word, row, col-1, dir)
-                if valid_pos:
-                    return True
-            if check_word_limits(word, row-1, col, dir) and [row-1, col] not in visited_grid:
-                valid_pos = place_word(word, row-1, col, dir)
-                if valid_pos:
-                    return True
-            if check_word_limits(word, row, col+1, dir) and [row, col+1] not in visited_grid:
-                valid_pos = place_word(word, row, col+1, dir)
-                if valid_pos:
-                    return True
-            if check_word_limits(word, row+1, col, dir) and [row+1, col] not in visited_grid:
-                valid_pos = place_word(word, row+1, col, dir)
-                if valid_pos: 
-                    return True
             return False
         ####################################################################################################################
         def check_word_limits(word, row, col, direction):
@@ -401,9 +344,12 @@ def making_the_game(grid_size, word_list):
                 direction = rand.choice(orientation)
                 k = word_limits(word,grid_size,direction)
                 check_and_place(word, k[0], k[1], direction)
-        printed_word_list = []
-        for i in printed_words:
-            printed_word_list.append(i)
+
+        for word in word_list:
+            while word not in printed_words:
+                direction = rand.choice(orientation)
+                k = word_limits(word,grid_size,direction)
+                check_and_place(word, k[0], k[1], direction)
 
         # printed_words = []
         for i in grid:
@@ -439,7 +385,7 @@ def list_of_words(topic, grid_size):
     # Request payload
     payload = {
         'model': 'gpt-4',
-        'messages': [{'role': 'user', 'content': f'I am making a game of scrabble. Give me approximately {num_of_words} words (with no spaces in the words itself) in all capital letters in a comma separated list from the topic {Topic} which are strictly no longer than {grid_size-1} characters. 3 of them may be more uncommon than the rest.'}],
+        'messages': [{'role': 'user', 'content': f'I am making a game of scrabble. Give me approximately {num_of_words} words (with no spaces in the words itself) in all capital letters in a comma separated list from the topic {Topic} which are strictly no longer than {grid_size-1} characters. {int(grid_size*0.3)} of them may be more uncommon than the rest.'}],
         'temperature': 0.8
     }
 
@@ -456,7 +402,6 @@ def rendering_the_game(request):
             grid_size = form.cleaned_data["grid_size"]
             topic_name = form.cleaned_data["topic_name"]
             GRID, PRINTED_WORDS = making_the_game(grid_size, list_of_words(topic_name, grid_size))
-            # GRID, PRINTED_WORDS = making_the_game(grid_size, ["RONALD", "GUSTAVO", "SALVADOR", "ACHINTH", "ABISHAI", "JAYPATEL", "BENJAMIN"])
             return render(request, "search_game/gamepage.html", {"grid": GRID, 'printed_words': PRINTED_WORDS})
         else:
             return render(request, "search_game/homepage.html",{ 
