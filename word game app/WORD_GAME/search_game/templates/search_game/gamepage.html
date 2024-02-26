@@ -16,11 +16,12 @@
                     </tr>
                 {% endfor %}
             </table>
-            
+            <h1 id = 'gameOver' class = 'hidden'>Congratulations! You've finished the game!</h1>
+            <button onclick="restartGame()" id = 'restartButton' class = 'hidden'>Start New Game</button>
             <h2>
                 Word List:
             </h2>       
-            <p>{% for i in printed_words %}
+            <p id ='wordList'>{% for i in printed_words %}
             <span class = 'word' id = '{{i}}'>{{i}}</span>
             {% endfor %}
             </p>
@@ -28,6 +29,11 @@
         <script>
             var printed_words = "{{printed_words}}";
             var grid = "{{ grid }}";
+            function restartGame() {
+                var url = "{% url 'homepage' %}";
+
+                window.location.href = url;
+            }
         </script>
         <a href="{% url 'homepage' %}">Bored or stuck? Make a new game!</a>
         <script src = "{% static 'search_game/gamepage_script.js' %}"></script>
