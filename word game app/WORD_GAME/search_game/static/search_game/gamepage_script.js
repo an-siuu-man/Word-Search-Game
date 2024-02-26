@@ -30,6 +30,7 @@ let x1 = 0;
 let y1 = 0;
 let x2 = 0;
 let y2 = 0;
+let count = 0;
 document.addEventListener('DOMContentLoaded', function () {
     
     var tds = document.querySelectorAll('#grid td');
@@ -48,7 +49,6 @@ document.addEventListener('DOMContentLoaded', function () {
             y1 = parseInt(Y1);
         } 
         else if (counter == 2) {
-
             [X2, Y2] = this.id.split('_');
             x2= parseInt(X2);
             y2 = parseInt(Y2);
@@ -60,14 +60,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     for(let i = y1-1; i < y2; i++) {
                         selectedString += cleanGrid[x1-1][i].trim();
                     }
-                    console.log(selectedString);
                 }
 
                 if (y2 < y1) {
                     for(let i = y1; i >= y2; i--) {
                         selectedString += cleanGrid[x1-1][i-1].trim();
                     }
-                    console.log(selectedString);
                 }
             }
 
@@ -76,14 +74,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     for(var i = x1; i <= x2; i++) {
                         selectedString += cleanGrid[i-1][y1-1].trim();
                     }
-                    console.log(selectedString);
                 }
 
                 if (x2 < x1) {
                     for(var i = x1; i >= x2; i--) {
                         selectedString += cleanGrid[i-1][y1-1].trim();
                     }
-                    console.log(selectedString);
                 }
             }
 
@@ -93,33 +89,36 @@ document.addEventListener('DOMContentLoaded', function () {
                     for (var i = 0; i <= y2 - y1; i++) {
                         selectedString += cleanGrid[x1 + i - 1][y1 + i - 1].trim();
                     }
-                    console.log(selectedString);
                 }
             
                 if (y1 > y2) {
                     for (var i = 0; i <= y1 - y2; i++) {
                         selectedString += cleanGrid[x1 + i - 1][y1 - i - 1].trim();
                     }
-                    console.log(selectedString);
                 }
             } 
                             
             counter = 0;
             extractedWords.forEach(function(word){
                 if (word == selectedString) {
-                    document.getElementById(word).style.borderColor = 'green';
+                    wordElem = document.getElementById(word);
+                    wordElem.style.borderColor = 'green';
+                    wordElem.style.backgroundColor = 'white';
+                    count++;
                 }
-
             })
+
+            if (count == extractedWords.length) {
+                document.getElementById('gameOver').style.display = 'block';
+                document.getElementById('restartButton').style.display = 'flex';
+            }
+
+            
         }
         
     })
     });
 });
-
-
-// document.getElementsByTagName('td').addEventListener('mouseover', myFunc);
-// character = document.getElementById('1_1').innerText
 
 
 
