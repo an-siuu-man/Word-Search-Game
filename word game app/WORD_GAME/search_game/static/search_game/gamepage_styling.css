@@ -55,7 +55,7 @@ tr:nth-child(odd) {
 h1, h2 {
     text-align: center;
     font-family:'Gotham';
-    color: rgb(0, 30, 255);
+    color: rgb(34, 0, 255);
     font-weight: 100;
 }
 
@@ -66,24 +66,37 @@ p {
     font-size: large;
 }
 
-a {
+#redirectLink {
     color: rgb(88, 88, 88);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    border: 1px white solid;
+    border-radius: 8px;
+    padding: 5px;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 20px;
+    margin-bottom: 30px;
+    margin-top: 30px;
     display: block;
-    width: 50%;
+    width: fit-content;
     text-align: center;
+    text-decoration-line: none;
+    transition: all 0.3s;
 }
+
+#redirectLink:hover {
+    border-radius: 0px;
+    background-color: white;
+}
+
 
 .hidden {
     text-align: center;
     font-size: xx-large;
     font-weight: 600;
-    color: darkgray;
+    color: rgb(38, 145, 3);
     display: none;
     font-family: 'Gotham';
+    transition: all 0.5s;
 }
 
 #restartButton {
@@ -97,25 +110,35 @@ a {
 }
 
 #restartButton:hover {
-    color: rgb(63, 68, 174);
+    color: rgb(34, 0, 255);
     font-weight:900;
     background-color: rgb(53, 53, 53);
-    border-radius: 12px;
-    transform: scale(1.2);
+    border-radius: 0px;
     cursor:pointer;
+}
+
+#wordList {
+    width: fit-content;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
 }
 .word {
     text-align: center;
-    margin: 5px;
     color:rgb(133, 133, 138);
     font-family:'Agency FB';
     font-weight: 600;
     font-size: x-large;
-    padding: 5px;
+    padding: 5px 5px;
+    line-height: 50px;
+    margin-left: auto;
+    margin-right: auto;
     background-color: transparent;
     border: 4px solid rgb(133, 133, 138);
     overflow-x: scroll;
-    transition: 0.3s ease;
+    transition: all 0.3s ease;
+    width: fit-content;
+
 }
 
 .word:hover {

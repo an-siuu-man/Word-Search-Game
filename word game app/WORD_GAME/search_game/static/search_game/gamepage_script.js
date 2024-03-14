@@ -52,7 +52,6 @@ document.addEventListener('DOMContentLoaded', function () {
             [X2, Y2] = this.id.split('_');
             x2= parseInt(X2);
             y2 = parseInt(Y2);
-            // console.log(typeof(x1), x1, y1, '    ', x2, y2);
             let selectedString = '';
 
             if (x1 == x2){
@@ -100,10 +99,53 @@ document.addEventListener('DOMContentLoaded', function () {
                             
             counter = 0;
             extractedWords.forEach(function(word){
-                if (word == selectedString) {
+                wordElem = document.getElementById(word);
+                if (word == selectedString && wordElem.style.borderColor != 'green') {
                     wordElem = document.getElementById(word);
                     wordElem.style.borderColor = 'green';
                     wordElem.style.backgroundColor = 'white';
+                    if (x1 == x2){
+                        if (y1 < y2) {
+                            for(let i = y1-1; i < y2; i++) {
+                                document.getElementById(`${x1}_${i+1}`).style.backgroundColor = 'green';
+                            }
+                        }
+        
+                        if (y2 < y1) {
+                            for(let i = y1; i >= y2; i--) {
+                                document.getElementById(`${x1}_${i}`).style.backgroundColor = 'green';
+                            }
+                        }
+                    }
+        
+                    if (y1 == y2) {
+                        if (x1 < x2) {
+                            for(var i = x1; i <= x2; i++) {
+                                document.getElementById(`${i}_${y1}`).style.backgroundColor = 'green';
+                            }
+                        }
+        
+                        if (x2 < x1) {
+                            for(var i = x1; i >= x2; i--) {
+                                document.getElementById(`${i}_${y1}`).style.backgroundColor = 'green';
+                            }
+                        }
+                    }
+        
+                    
+                    if (Math.abs(y2 - y1) == x2 - x1) {
+                        if (y2 > y1) {
+                            for (var i = 0; i <= y2 - y1; i++) {
+                                document.getElementById(`${x1+i}_${y1+i}`).style.backgroundColor = 'green';
+                            }
+                        }
+                    
+                        if (y1 > y2) {
+                            for (var i = 0; i <= y1 - y2; i++) {
+                                document.getElementById(`${x1+i}_${y1-i}`).style.backgroundColor = 'green';
+                            }
+                        }
+                    }
                     count++;
                 }
             })
@@ -111,6 +153,7 @@ document.addEventListener('DOMContentLoaded', function () {
             if (count == extractedWords.length) {
                 document.getElementById('gameOver').style.display = 'block';
                 document.getElementById('restartButton').style.display = 'flex';
+                document.getElementById('redirectLink').style.display = 'none';
             }
 
             
@@ -119,6 +162,7 @@ document.addEventListener('DOMContentLoaded', function () {
     })
     });
 });
+
 
 
 

@@ -21,10 +21,10 @@
             <h2>
                 Word List:
             </h2>       
-            <p id ='wordList'>{% for i in printed_words %}
+            <div id ='wordList'>{% for i in printed_words %}
             <span class = 'word' id = '{{i}}'>{{i}}</span>
             {% endfor %}
-            </p>
+            </div>
 
         <script>
             var printed_words = "{{printed_words}}";
@@ -35,7 +35,7 @@
                 window.location.href = url;
             }
         </script>
-        <a href="{% url 'homepage' %}">Bored or stuck? Make a new game!</a>
+        <a id = 'redirectLink' href="{% url 'homepage' %}">Bored or stuck? Make a new game!</a>
         <script src = "{% static 'search_game/gamepage_script.js' %}"></script>
         </body>
     </head>
