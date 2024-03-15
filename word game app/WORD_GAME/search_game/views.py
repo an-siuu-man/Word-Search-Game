@@ -10,8 +10,6 @@ class MakeAGridForm (forms.Form):
 
 def recommendation_topics():
 
-    # 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       <---------------- ChatGPT API key (DON'T REMOVE THIS FROM THIS LINE)
-
     # Replace 'YOUR_OPENAI_API_KEY' with your actual OpenAI API key
     openai_api_key = 'YOUR_OPENAI_API_KEY'
 
@@ -367,8 +365,6 @@ def list_of_words(topic, grid_size):
     Topic = topic
     grid_size = grid_size
     num_of_words = grid_size
-
-    # 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       <---------------- ChatGPT API key (DON'T REMOVE THIS FROM THIS LINE)
 
     # Replace 'YOUR_OPENAI_API_KEY' with your actual OpenAI API key
     openai_api_key = 'YOUR_OPENAI_API_KEY'
