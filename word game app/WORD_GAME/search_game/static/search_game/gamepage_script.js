@@ -38,17 +38,16 @@ document.addEventListener('DOMContentLoaded', function () {
 
     tds.forEach(function(td) {
 
-
     td.addEventListener('click', function() {
-        
         counter++;
-        
         if (counter == 1) {
             [X1, Y1] = this.id.split('_');
             x1= parseInt(X1);
             y1 = parseInt(Y1);
+            this.style.backgroundColor = 'blue';
         } 
         else if (counter == 2) {
+            document.getElementById(`${x1}_${y1}`).style.backgroundColor = ''
             [X2, Y2] = this.id.split('_');
             x2= parseInt(X2);
             y2 = parseInt(Y2);
