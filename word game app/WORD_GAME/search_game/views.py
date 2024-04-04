@@ -4,11 +4,14 @@ from django import forms
 import random as rand
 from openai import OpenAI
 import requests
+
 class MakeAGridForm (forms.Form):
-    topic_name = forms.CharField(label = "Enter the topic name ", widget=forms.TextInput(attrs={"class": 'topic_name'}) )
-    grid_size = forms.IntegerField(label = "Enter the desired grid size ", max_value= 30, min_value=5, widget= forms.NumberInput(attrs={'class': 'grid_size'}))
+    topic_name = forms.CharField(label = "Enter the topic name ", widget=forms.TextInput(attrs={"class": 'form_field'}) )
+    grid_size = forms.IntegerField(label = "Enter the desired grid size ", max_value= 30, min_value=5, widget= forms.NumberInput(attrs={'class': 'form_field'}))
 
 def recommendation_topics():
+
+    # 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       <---------------- ChatGPT API key (DON'T REMOVE THIS FROM THIS LINE)
 
     # Replace 'YOUR_OPENAI_API_KEY' with your actual OpenAI API key
     openai_api_key = 'YOUR_OPENAI_API_KEY'
@@ -64,10 +67,6 @@ def making_the_game(grid_size, word_list):
         # visited_grid = []
         # printed_words = []
         def place_word(word, row, col, direction):
-            # global grid
-            # global visited_grid
-            # global placement
-            # global printed_words
 
             ROW = row      
             COL = col
@@ -344,10 +343,14 @@ def making_the_game(grid_size, word_list):
                 check_and_place(word, k[0], k[1], direction)
 
         for word in word_list:
-            while word not in printed_words:
+            count = 0
+            while (word not in printed_words and len(word) <= grid_size):
+                count += 1
                 direction = rand.choice(orientation)
                 k = word_limits(word,grid_size,direction)
                 check_and_place(word, k[0], k[1], direction)
+                if count > 25:
+                    break
 
         # printed_words = []
         for i in grid:
@@ -366,30 +369,33 @@ def list_of_words(topic, grid_size):
     grid_size = grid_size
     num_of_words = grid_size
 
+    # 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       <---------------- ChatGPT API key (DON'T REMOVE THIS FROM THIS LINE)
+
     # Replace 'YOUR_OPENAI_API_KEY' with your actual OpenAI API key
     openai_api_key = 'YOUR_OPENAI_API_KEY'
 
-    # OpenAI API endpoint
+    # # OpenAI API endpoint
     api_endpoint = 'https://api.openai.com/v1/chat/completions'
 
-    # Request headers
+    # # Request headers
     headers = {
         'Content-Type': 'application/json',
         'Authorization': f'Bearer {openai_api_key}'
     }
 
-    # Request payload
+    # # Request payload
     payload = {
         'model': 'gpt-4',
-        'messages': [{'role': 'user', 'content': f'I am making a game of scrabble. Give me approximately {num_of_words} words (with no spaces in the words itself) in all capital letters in a comma separated list from the topic {Topic} which are strictly no longer than {grid_size-1} characters. {int(grid_size*0.3)} of them may be more uncommon than the rest.'}],
+        'messages': [{'role': 'user', 'content': f'I am making a game of scrabble. Give me exactly {num_of_words+3} unique words (with no spaces in the words itself) in all capital letters in a comma separated list from the topic {Topic} which are strictly no longer than {grid_size} characters. {int(grid_size*0.3)} of them may be more uncommon than the rest.'}],
         'temperature': 0.8
     }
 
-    # Make the API request
+    # # Make the API request
     response = requests.post(api_endpoint, json=payload, headers=headers)
-    # Print the response
+    # # Print the response
     k = response.json()['choices'][0]['message']['content'].split(', ')
     return k
+
 
 def rendering_the_game(request):
     if request.method == "POST":
@@ -398,6 +404,7 @@ def rendering_the_game(request):
             grid_size = form.cleaned_data["grid_size"]
             topic_name = form.cleaned_data["topic_name"]
             GRID, PRINTED_WORDS = making_the_game(grid_size, list_of_words(topic_name, grid_size))
+
             return render(request, "search_game/gamepage.html", {"grid": GRID, 'printed_words': PRINTED_WORDS})
         else:
             return render(request, "search_game/homepage.html",{ 
