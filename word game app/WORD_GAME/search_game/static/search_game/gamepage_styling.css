@@ -10,11 +10,12 @@
 }
 
 body {
-    background-image: url('background1.jpg');
+    /* background-image: url('background1.jpg'); */
     background-repeat: no-repeat;
     background-attachment: fixed;
     background-size: cover;
     margin: 0;
+    background-color: rgb(32, 32, 32);
 }
 
 table{
@@ -22,16 +23,17 @@ table{
     padding: 0px;
     text-align: center;
     margin: auto;
-    background-color: rgb(0, 0, 0); 
+    background-color: rgb(36, 6, 119); 
 }
 
 td {
-    border: 2px solid rgb(231, 231, 231);
+    border: 2px solid rgb(255, 255, 255);
     width: 25px;
     padding: 5px;
-    color: white;
+    color: rgb(255, 255, 255);
     font-family: 'Gotham';
     font-size: large;
+    font-weight: 600;
     transition: 0.3s ease;
 }
 
@@ -55,7 +57,7 @@ tr:nth-child(odd) {
 h1, h2 {
     text-align: center;
     font-family:'Gotham';
-    color: rgb(34, 0, 255);
+    color: rgb(206, 115, 12);
     font-weight: 100;
 }
 
@@ -66,26 +68,30 @@ p {
     font-size: large;
 }
 
-#redirectLink {
-    color: rgb(88, 88, 88);
+.buttons {
+    background: rgb(255, 255, 255);
+    color: rgb(7, 7, 7);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     border: 1px white solid;
     border-radius: 8px;
     padding: 5px;
     margin-left: auto;
     margin-right: auto;
-    margin-bottom: 30px;
-    margin-top: 30px;
+    margin-top: 10px;
     display: block;
     width: fit-content;
     text-align: center;
+    font-size: larger;
     text-decoration-line: none;
     transition: all 0.3s;
 }
 
-#redirectLink:hover {
+.buttons:hover {
+    background: transparent;
+    color:white;
     border-radius: 0px;
-    background-color: white;
+    cursor:pointer;
+
 }
 
 
@@ -101,7 +107,7 @@ p {
 
 #restartButton {
     margin: auto;
-    font-size: large;
+    font-size: larger;
     padding: 8px;
     background-color: rgb(231, 231, 231);
     color: rgb(163, 30, 30);
@@ -110,7 +116,7 @@ p {
 }
 
 #restartButton:hover {
-    color: rgb(34, 0, 255);
+    color: rgb(206, 115, 12);
     font-weight:900;
     background-color: rgb(53, 53, 53);
     border-radius: 0px;
@@ -134,7 +140,7 @@ p {
     margin-left: auto;
     margin-right: auto;
     background-color: transparent;
-    border: 4px solid rgb(133, 133, 138);
+    border: 4px solid rgb(128, 111, 255);
     overflow-x: scroll;
     transition: all 0.3s ease;
     width: fit-content;

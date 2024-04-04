@@ -35,7 +35,12 @@
                 window.location.href = url;
             }
         </script>
-        <a id = 'redirectLink' href="{% url 'homepage' %}">Bored or stuck? Make a new game!</a>
+        <button id = 'instructionsButton' class = 'buttons'>
+            How to play?
+        </button>
+        <p id = 'instructions'>
+        </p>
+        <a id = 'redirectLink' class = 'buttons' href="{% url 'homepage' %}">Bored or stuck? Make a new game!</a>
         <script src = "{% static 'search_game/gamepage_script.js' %}"></script>
         </body>
     </head>

@@ -24,12 +24,12 @@
             <form id = 'gameForm' action = "{% url 'gamepage' %}" method = "post">
                 {% csrf_token %}
                 {{form}}
-                <input type="submit" class = 'button' value="Submit">
+                <input type="submit" class = 'button' value="Start">
             </form>
             <div id = 'loading'>
-                <img id = 'loading-gif' src = "{% static 'search_game/Vanilla-2.2s-280px.svg' %}"></div>
-                <!-- <img id = 'loading-gif' src = "{% static 'search_game/loading_animation.gif' %}"></div> -->
-            <div id = "recommendations">
+                {% comment %} <img id = 'loading-gif' src = "{% static 'search_game/Vanilla-2.2s-280px.svg' %}" autoplay loop></div> {% endcomment %}
+            </div>
+                <div id = "recommendations">
                 Not getting any ideas? Here's some topic recommendations:
             </div>
 
@@ -39,6 +39,7 @@
             '{{topic}}'
             {% endfor %}
             </div>
+            <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
             <script src = "{% static 'search_game/homepage_script.js' %}"></script>
         </body>
 
