@@ -365,8 +365,6 @@ def list_of_words(topic, grid_size):
     grid_size = grid_size
     num_of_words = grid_size
 
-    # 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       <---------------- ChatGPT API key (DON'T REMOVE THIS FROM THIS LINE)
-
     # # OpenAI API endpoint
     api_endpoint = 'https://api.openai.com/v1/chat/completions'
 
