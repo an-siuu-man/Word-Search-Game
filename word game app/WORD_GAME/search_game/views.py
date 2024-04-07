@@ -4,6 +4,7 @@ from django import forms
 import random as rand
 from openai import OpenAI
 import requests
+import os
 
 class MakeAGridForm (forms.Form):
     topic_name = forms.CharField(label = "Enter the topic name ", widget=forms.TextInput(attrs={"class": 'form_field'}) )
@@ -11,18 +12,13 @@ class MakeAGridForm (forms.Form):
 
 def recommendation_topics():
 
-    # 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       <---------------- ChatGPT API key (DON'T REMOVE THIS FROM THIS LINE)
-
-    # Replace 'YOUR_OPENAI_API_KEY' with your actual OpenAI API key
-    openai_api_key = 'YOUR_OPENAI_API_KEY'
-
     # OpenAI API endpoint
     api_endpoint = 'https://api.openai.com/v1/chat/completions'
 
     # Request headers
     headers = {
         'Content-Type': 'application/json',
-        'Authorization': f'Bearer {openai_api_key}'
+        'Authorization': f'Bearer {os.environ.get('OPENAI_API_KEY')}'
     }
 
     # Request payload
@@ -371,16 +367,13 @@ def list_of_words(topic, grid_size):
 
     # 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       <---------------- ChatGPT API key (DON'T REMOVE THIS FROM THIS LINE)
 
-    # Replace 'YOUR_OPENAI_API_KEY' with your actual OpenAI API key
-    openai_api_key = 'YOUR_OPENAI_API_KEY'
-
     # # OpenAI API endpoint
     api_endpoint = 'https://api.openai.com/v1/chat/completions'
 
     # # Request headers
     headers = {
         'Content-Type': 'application/json',
-        'Authorization': f'Bearer {openai_api_key}'
+        'Authorization': f'Bearer {os.environ.get('OPENAI_API_KEY')}'
     }
 
     # # Request payload
@@ -404,6 +397,8 @@ def rendering_the_game(request):
             grid_size = form.cleaned_data["grid_size"]
             topic_name = form.cleaned_data["topic_name"]
             GRID, PRINTED_WORDS = making_the_game(grid_size, list_of_words(topic_name, grid_size))
+            # GRID, PRINTED_WORDS = making_the_game(grid_size, ["RONALD", "HUDSON","EMMA", "MOHAMMED","GUSTAVO", "BRENNEC", "ELARABY", "MANISH", "STACEY", "SALVADOR", "ACHINTH", "ABISHAI", "JAYPATEL", "BENJAMIN"])
+            # GRID, PRINTED_WORDS = making_the_game(grid_size, ["RONALD", "GUSTAVO","PRESTON"])
 
             return render(request, "search_game/gamepage.html", {"grid": GRID, 'printed_words': PRINTED_WORDS})
         else:
