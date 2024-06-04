@@ -47,7 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
             this.style.backgroundColor = 'blue';
         } 
         else if (counter == 2) {
-            document.getElementById(`${x1}_${y1}`).style.backgroundColor = ''
+            document.getElementById(`${x1}_${y1}`).style.backgroundColor = '';
             [X2, Y2] = this.id.split('_');
             x2= parseInt(X2);
             y2 = parseInt(Y2);

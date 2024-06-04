@@ -18,7 +18,7 @@ def recommendation_topics():
     # Request headers
     headers = {
         'Content-Type': 'application/json',
-        'Authorization': f'Bearer {os.environ.get('OPENAI_API_KEY')}'
+        'Authorization': f'Bearer {os.environ.get("OPENAI_API_KEY")}'
     }
 
     # Request payload
@@ -371,7 +371,7 @@ def list_of_words(topic, grid_size):
     # # Request headers
     headers = {
         'Content-Type': 'application/json',
-        'Authorization': f'Bearer {os.environ.get('OPENAI_API_KEY')}'
+        'Authorization': f'Bearer {os.environ.get("OPENAI_API_KEY")}'
     }
 
     # # Request payload
